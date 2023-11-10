@@ -12,7 +12,7 @@ public class Calendar {
     private Calendar() {
     }
 
-    public static boolean isChristmasEventSeason(final int date) {
+    public static boolean isChristmasDiscountSeason(final int date) {
         return FIRST_DATE <= date && date <= CHRISTMAS_DATE;
     }
 
@@ -26,7 +26,7 @@ public class Calendar {
     }
 
     //==이벤트 달력에 별이 있는 날인지 판단==//
-    public static boolean isSpecialDay(final int date) {
+    public static boolean isSpecialDiscountDay(final int date) {
         return getDayOfWeekFrom(date) == DayOfWeek.SUNDAY || isChristmas(date);
     }
 
