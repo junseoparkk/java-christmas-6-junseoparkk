@@ -1,5 +1,7 @@
 package christmas.model.order;
 
+import christmas.model.menu.MenuCategory;
+import christmas.model.menu.MenuItem;
 import christmas.validator.OrderValidator;
 import org.junit.jupiter.api.Order;
 
@@ -11,5 +13,9 @@ public class OrderLineItem {
         OrderValidator.validateOrderLineItem(name, quantity);
         this.name = name;
         this.quantity = quantity;
+    }
+
+    public MenuCategory getMenuCategory() {
+        return MenuItem.fromName(name).getCategory();
     }
 }

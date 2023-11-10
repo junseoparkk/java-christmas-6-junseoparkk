@@ -54,6 +54,10 @@ public enum MenuItem {
                 .orElse(NONE);
     }
 
+    public MenuCategory getCategory() {
+        return category;
+    }
+
     public String getName() {
         return name;
     }
