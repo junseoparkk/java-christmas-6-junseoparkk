@@ -5,6 +5,8 @@ import static christmas.model.menu.MenuCategory.MAIN;
 import static christmas.model.menu.MenuCategory.DESSERT;
 import static christmas.model.menu.MenuCategory.BEVERAGE;
 
+import java.util.Arrays;
+
 public enum MenuItem {
     //APPETIZER
     MUSHROOM_SOUP(APPETIZER, "양송이수프", 6_000),
@@ -34,5 +36,12 @@ public enum MenuItem {
         this.category = category;
         this.name = name;
         this.price = price;
+    }
+
+    public static boolean exists(final String name) {
+        return Arrays.stream(values())
+                .filter(menuItem -> menuItem.name.equals(name))
+                .findFirst()
+                .isPresent();
     }
 }
