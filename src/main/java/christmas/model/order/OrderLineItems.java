@@ -1,12 +1,9 @@
 package christmas.model.order;
 
-import christmas.model.menu.MenuItem;
 import christmas.validator.OrderValidator;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.Order;
 
 public class OrderLineItems {
     private static final String COMMA = ",";
@@ -16,6 +13,7 @@ public class OrderLineItems {
     public OrderLineItems(final String requestOrderLineItems) {
         List<String> eachOrders = mapToListByDelimiter(requestOrderLineItems);
         List<OrderLineItem> items = processOrder(eachOrders);
+        OrderValidator.validateOrderLineItems(items);
         this.items = items;
     }
 
