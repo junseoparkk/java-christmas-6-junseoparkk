@@ -26,7 +26,9 @@ public enum MenuItem {
     //BEVERAGE
     ZERO_COKE(BEVERAGE, "제로콜라", 3_000),
     RED_WINE(BEVERAGE, "레드와인", 60_000),
-    CHAMPAGNE(BEVERAGE, "샴페인", 25_000);
+    CHAMPAGNE(BEVERAGE, "샴페인", 25_000),
+
+    NONE(MenuCategory.NONE, "없음", 0);
 
     private final MenuCategory category;
     private final String name;
@@ -43,6 +45,13 @@ public enum MenuItem {
                 .filter(menuItem -> menuItem.name.equals(name))
                 .findFirst()
                 .isPresent();
+    }
+
+    public static MenuItem fromName(final String name) {
+        return Arrays.stream(values())
+                .filter(menuItem -> menuItem.getName().equals(name))
+                .findFirst()
+                .orElse(NONE);
     }
 
     public String getName() {
