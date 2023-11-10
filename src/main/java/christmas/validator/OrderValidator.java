@@ -56,7 +56,7 @@ public class OrderValidator {
 
     private static void validateDuplicatedItem(List<OrderLineItem> items) {
         List<String> target = items.stream()
-                .map(OrderLineItem::getName)
+                .map(OrderLineItem::name)
                 .distinct()
                 .collect(Collectors.toList());
         if (target.size() != items.size()) {
@@ -66,7 +66,7 @@ public class OrderValidator {
 
     private static void validateOrderItemsSize(List<OrderLineItem> items) {
         int totalCounts = items.stream()
-                .mapToInt(OrderLineItem::getQuantity)
+                .mapToInt(OrderLineItem::quantity)
                 .sum();
         if (MAXIMUM_QUANTITY < totalCounts) {
             throw new InvalidOrderException();
