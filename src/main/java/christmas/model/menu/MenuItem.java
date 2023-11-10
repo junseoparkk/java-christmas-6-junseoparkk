@@ -44,4 +44,8 @@ public enum MenuItem {
                 .findFirst()
                 .isPresent();
     }
+
+    public String getName() {
+        return name;
+    }
 }
