@@ -8,4 +8,8 @@ public class Order {
         this.date = date;
         this.menu = menu;
     }
+
+    public int calculatePreviousDate() {
+        return date - 1;
+    }
 }
