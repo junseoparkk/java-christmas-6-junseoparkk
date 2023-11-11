@@ -17,6 +17,14 @@ public class OrderLineItems {
         this.items = items;
     }
 
+    public int size() {
+        return items.size();
+    }
+
+    public OrderLineItem findOrderLineItemByIndex(int index) {
+        return items.get(index);
+    }
+
     private List<String> mapToListByDelimiter(String orderRequest) {
         return Arrays.asList(orderRequest.split(COMMA));
     }

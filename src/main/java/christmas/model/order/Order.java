@@ -1,15 +1,26 @@
 package christmas.model.order;
 
+import christmas.model.menu.MenuCategory;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public class Order {
     private final int date;
-    private final OrderLineItems menu;
+    private final OrderLineItems menus;
 
-    public Order(int date, OrderLineItems menu) {
+    public Order(int date, OrderLineItems menus) {
         this.date = date;
-        this.menu = menu;
+        this.menus = menus;
     }
 
     public int calculatePreviousDate() {
         return date - 1;
+    }
+
+    public int countMenuByCategory(final MenuCategory menuCategory) {
+        return (int) IntStream.range(0, menus.size())
+                .mapToObj(menus::findOrderLineItemByIndex)
+                .filter(menu -> menu.getMenuCategory() == menuCategory)
+                .count();
     }
 }
