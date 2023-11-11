@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.order.OrderLineItems;
 import christmas.utils.InputHandler;
 import christmas.view.ConsoleOutputView;
 
@@ -13,5 +14,6 @@ public class EventPlannerController {
     public void run() {
         outputView.printGreeting();
         final int expectedVisitDate = InputHandler.receiveValidatedVisitDate();
+        final OrderLineItems orderLineItems = InputHandler.receiveValidatedOrderItems();
     }
 }

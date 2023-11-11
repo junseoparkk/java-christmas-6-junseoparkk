@@ -1,5 +1,6 @@
 package christmas.utils;
 
+import christmas.model.order.OrderLineItems;
 import christmas.validator.InputValidator;
 import christmas.view.ConsoleInputView;
 import christmas.view.ConsoleOutputView;
@@ -16,6 +17,13 @@ public class InputHandler {
                 ConsoleInputView::readExpectedVisitDate,
                 InputValidator::validateDateForm,
                 Integer::parseInt);
+    }
+
+    public static OrderLineItems receiveValidatedOrderItems() {
+        return receiveValidatedInput(
+                ConsoleInputView::readOrderLineItems,
+                InputValidator::validateOrderForm,
+                OrderLineItems::new);
     }
 
     private static <T> T receiveValidatedInput(
