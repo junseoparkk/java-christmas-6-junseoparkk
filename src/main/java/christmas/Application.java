@@ -1,12 +1,14 @@
 package christmas;
 
 import christmas.controller.EventPlannerController;
+import christmas.service.OrderService;
 import christmas.view.ConsoleOutputView;
 
 public class Application {
     public static void main(String[] args) {
         ConsoleOutputView outputView = new ConsoleOutputView();
-        EventPlannerController eventPlannerController = new EventPlannerController(outputView);
+        OrderService orderService = new OrderService();
+        EventPlannerController eventPlannerController = new EventPlannerController(outputView, orderService);
         eventPlannerController.run();
     }
 }
