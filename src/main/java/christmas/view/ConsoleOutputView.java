@@ -7,6 +7,10 @@ public class ConsoleOutputView {
         System.out.println(EVENT_PLANNER_GREETING_MESSAGE);
     }
 
+    public static void printException(final String exceptionMessage) {
+        System.out.println(exceptionMessage);
+    }
+
     private void printBlankLine() {
         System.out.println();
     }
