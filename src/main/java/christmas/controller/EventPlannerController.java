@@ -15,5 +15,6 @@ public class EventPlannerController {
         outputView.printGreeting();
         final int expectedVisitDate = InputHandler.receiveValidatedVisitDate();
         final OrderLineItems orderLineItems = InputHandler.receiveValidatedOrderItems();
+        outputView.printEventBenefitGuide(expectedVisitDate);
     }
 }
