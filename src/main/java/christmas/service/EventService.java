@@ -1,11 +1,10 @@
 package christmas.service;
 
 import christmas.model.order.Order;
+import christmas.repository.EventPlannerRepository;
 
 public class EventService {
-    private Order order;
+    private final EventPlannerRepository repository = EventPlannerRepository.getInstance();
 
-    public void saveOrder(final Order order) {
-        this.order = order;
-    }
+
 }
