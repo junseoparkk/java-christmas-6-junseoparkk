@@ -2,6 +2,12 @@ package christmas.model.event;
 
 import static org.assertj.core.api.Assertions.*;
 
+import christmas.model.event.policy.ChristmasDayDiscountPolicy;
+import christmas.model.event.policy.DiscountPolicy;
+import christmas.model.event.policy.GiveawayEventPolicy;
+import christmas.model.event.policy.SpecialDiscountPolicy;
+import christmas.model.event.policy.WeekdayDiscountPolicy;
+import christmas.model.event.policy.WeekendDiscountPolicy;
 import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 import christmas.model.order.OrderLineItems;

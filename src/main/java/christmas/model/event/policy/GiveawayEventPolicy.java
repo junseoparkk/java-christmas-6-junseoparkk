@@ -1,7 +1,9 @@
-package christmas.model.event;
+package christmas.model.event.policy;
 
 import static christmas.model.menu.MenuItem.*;
 
+import christmas.model.event.EventCategory;
+import christmas.model.event.policy.DiscountPolicy;
 import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 

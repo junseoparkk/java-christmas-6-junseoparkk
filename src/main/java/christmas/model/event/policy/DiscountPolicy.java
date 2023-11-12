@@ -1,5 +1,6 @@
-package christmas.model.event;
+package christmas.model.event.policy;
 
+import christmas.model.event.EventCategory;
 import christmas.model.order.Order;
 
 public interface DiscountPolicy {
