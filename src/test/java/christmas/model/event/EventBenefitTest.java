@@ -24,7 +24,8 @@ public class EventBenefitTest {
         EventBenefit eventBenefit = new EventBenefit(order);
 
         //when
-        Map<EventCategory, Boolean> benefits = eventBenefit.applyEvent();
+        eventBenefit.applyEvent();
+        Map<EventCategory, Boolean> benefits = eventBenefit.getAllBenefits();
 
         //then
         assertThat(benefits.entrySet().stream()
@@ -129,7 +130,8 @@ public class EventBenefitTest {
         EventBenefit eventBenefit = new EventBenefit(order);
 
         //when
-        Map<EventCategory, Boolean> benefits = eventBenefit.applyEvent();
+        eventBenefit.applyEvent();
+        Map<EventCategory, Boolean> benefits = eventBenefit.getAllBenefits();
 
         //then
         assertThat(benefits.values().stream()
