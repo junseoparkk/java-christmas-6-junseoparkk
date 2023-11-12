@@ -7,6 +7,7 @@ import christmas.service.OrderService;
 import christmas.utils.InputHandler;
 import christmas.view.ConsoleOutputView;
 import java.util.Map;
+import org.mockito.internal.matchers.Or;
 
 public class EventPlannerController {
     private final ConsoleOutputView outputView;
@@ -21,6 +22,7 @@ public class EventPlannerController {
         outputView.printGreeting();
         final Order order = receiveOrderFromCustomer();
         printOrderMenu(order);
+        printTotalOrderPrice(order);
     }
 
     private Order receiveOrderFromCustomer() {
@@ -30,11 +32,16 @@ public class EventPlannerController {
         return orderService.createOrder(expectedVisitDate, orderLineItems);
     }
 
-    protected void printOrderMenu(final Order order) {
+    private void printOrderMenu(final Order order) {
         Map<MenuItem, Integer> menu = order.getMenuWithQuantity();
         outputView.printOrderMenuMessage();
         menu.entrySet().stream()
                 .map(entry -> Map.entry(MenuItem.fromMenuItem(entry.getKey()), entry.getValue()))
                 .forEach(entry -> outputView.printOrderMenu(entry.getKey(), entry.getValue()));
+    }
+
+    private void printTotalOrderPrice(final Order order) {
+        int totalOrderPrice = order.calculateTotalOrderPrice();
+        outputView.printTotalOrderPrice(totalOrderPrice);
     }
 }
