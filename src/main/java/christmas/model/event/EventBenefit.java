@@ -8,6 +8,7 @@ import static christmas.model.event.EventCategory.WEEK_END_DISCOUNT;
 
 import christmas.model.order.Order;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ public class EventBenefit {
         this.order = order;
     }
 
-    public void applyEvent() {
+    public Map<EventCategory, Boolean> applyEvent() {
         if (order.calculateTotalOrderPrice() > MINIMUM_ORDER_PRICE) {
             applyChristmasDiscountPolicy(order);
             applyWeekdayDiscountPolicy(order);
@@ -32,6 +33,7 @@ public class EventBenefit {
             applySpecialDiscountPolicy(order);
             applyGiveawayDiscountPolicy(order);
         }
+        return Collections.unmodifiableMap(benefits);
     }
 
     public boolean findAppliedEventFrom(final EventCategory eventCategory) {
