@@ -3,7 +3,9 @@ package christmas.model.order;
 import christmas.model.calendar.Calendar;
 import christmas.model.menu.MenuCategory;
 import christmas.model.menu.MenuItem;
-import java.util.List;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Order {
@@ -40,5 +42,16 @@ public class Order {
                     return menuItem.getPrice() * menuQuantity;
                 })
                 .sum();
+    }
+
+    public Map<MenuItem, Integer> getMenuWithQuantity() {
+        return IntStream.range(0, menus.size())
+                .mapToObj(menus::findOrderLineItemByIndex)
+                .collect(Collectors.toMap(
+                        item -> MenuItem.fromName(item.name()),
+                        OrderLineItem::quantity,
+                        (existing, replacement) -> existing + replacement,
+                        () -> new EnumMap<>(MenuItem.class)
+                ));
     }
 }
