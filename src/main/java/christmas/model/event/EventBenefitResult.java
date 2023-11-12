@@ -1,7 +1,11 @@
 package christmas.model.event;
 
+import static christmas.model.event.EventCategory.GIVEAWAY_EVENT;
+
 import christmas.model.event.policy.DiscountPolicy;
 import christmas.model.event.policy.DiscountPolicyConfig;
+import christmas.model.event.policy.GiveawayEventPolicy;
+import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,7 +13,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.stream.IntStream;
 
 public class EventBenefitResult {
     private final Map<EventCategory, Integer> result = new EnumMap<>(EventCategory.class);
@@ -42,6 +45,14 @@ public class EventBenefitResult {
                 .map(Map.Entry::getValue)
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    public int getTotalDiscountPrice() {
+        int totalBenefitPrice = getTotalBenefitPrice();
+        if (result.get(GIVEAWAY_EVENT) != 0) {
+            totalBenefitPrice -= MenuItem.CHAMPAGNE.getPrice();
+        }
+        return totalBenefitPrice;
     }
 
     private void initializeResult() {
