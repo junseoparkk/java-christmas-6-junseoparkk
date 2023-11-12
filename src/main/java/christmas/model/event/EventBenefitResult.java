@@ -3,6 +3,7 @@ package christmas.model.event;
 import static christmas.model.event.EventCategory.GIVEAWAY_EVENT;
 import static christmas.model.menu.MenuItem.CHAMPAGNE;
 
+import christmas.model.badge.Badge;
 import christmas.model.event.policy.DiscountPolicy;
 import christmas.model.event.policy.DiscountPolicyConfig;
 import christmas.model.menu.MenuItem;
@@ -54,6 +55,10 @@ public class EventBenefitResult {
             totalBenefitPrice -= GIFT_ITEM.getPrice();
         }
         return totalBenefitPrice;
+    }
+
+    public Badge giveBadgeByTotalBenefitPrice() {
+        return Badge.getBadgeByTotalBenefit(calculateTotalBenefitPrice());
     }
 
     private void initializeResult() {

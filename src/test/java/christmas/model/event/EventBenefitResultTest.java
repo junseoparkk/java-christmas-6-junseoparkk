@@ -2,6 +2,7 @@ package christmas.model.event;
 
 import static org.assertj.core.api.Assertions.*;
 
+import christmas.model.badge.Badge;
 import christmas.model.order.Order;
 import christmas.model.order.OrderLineItems;
 import java.util.List;
@@ -72,8 +73,10 @@ public class EventBenefitResultTest {
         //then
         int totalBenefitPrice = eventBenefitResult.calculateTotalBenefitPrice();
         int totalDiscountPrice = eventBenefitResult.calculateTotalDiscountPrice();
+        Badge badge = eventBenefitResult.giveBadgeByTotalBenefitPrice();
 
         assertThat(totalBenefitPrice).isEqualTo(31246);
         assertThat(totalDiscountPrice).isEqualTo(6246);
+        assertThat(badge).isEqualTo(Badge.SANTA);
     }
 }
