@@ -2,6 +2,7 @@ package christmas.model.event;
 
 import static org.assertj.core.api.Assertions.*;
 
+import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 import christmas.model.order.OrderLineItems;
 import org.junit.jupiter.api.DisplayName;
@@ -140,24 +141,26 @@ public class EventTest {
         assertThat(discountAmount).isEqualTo(1000);
     }
 
-    private int calculateDiscountAmount(Order order, DiscountPolicy discountPolicy) {
-        return discountPolicy.calculateDiscountAmount(order);
-    }
-
     //GiveawayEventPolicy
     @DisplayName("할인 전 총주문 금액이 12만 원 이상이라면, 샴페인 1개를 증정해야 한다.")
     @Test
     void testGiveawayEventPolicy() {
         //given
         int date = 3;
-        OrderLineItems menus = new OrderLineItems("시저샐러드-2,초코케이크-2,레드와인-1");
+        OrderLineItems menus = new OrderLineItems("시저샐러드-2,바비큐립-3,레드와인-1");
         Order order = new Order(date, menus);
-        DiscountPolicy discountPolicy = new GiveawayEventPolicy();
+        GiveawayEventPolicy giveawayEventPolicy = new GiveawayEventPolicy();
 
         //when
-        int discountAmount = discountPolicy.calculateDiscountAmount(order);
+        int discountAmount = giveawayEventPolicy.calculateDiscountAmount(order);
+        MenuItem item = giveawayEventPolicy.giveItem(order);
 
         //then
-        assertThat(discountAmount).isEqualTo(25000);
+        assertThat(item).isEqualTo(MenuItem.CHAMPAGNE);
+        assertThat(discountAmount).isEqualTo(item.getPrice());
+    }
+
+    private int calculateDiscountAmount(Order order, DiscountPolicy discountPolicy) {
+        return discountPolicy.calculateDiscountAmount(order);
     }
 }

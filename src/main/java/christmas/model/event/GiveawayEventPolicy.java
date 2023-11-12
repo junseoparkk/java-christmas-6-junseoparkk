@@ -1,11 +1,13 @@
 package christmas.model.event;
 
+import static christmas.model.menu.MenuItem.*;
+
 import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 
 public class GiveawayEventPolicy implements DiscountPolicy {
     private static final int DISCOUNT_STANDARD_AMOUNT = 120_000;
-    private static final MenuItem GIFT_ITEM = MenuItem.CHAMPAGNE;
+    private static final MenuItem GIFT_ITEM = CHAMPAGNE;
 
     @Override
     public EventCategory getEventCategory() {
@@ -13,15 +15,20 @@ public class GiveawayEventPolicy implements DiscountPolicy {
     }
 
     @Override
-    public int calculateDiscountAmount(Order order) {
-        return GIFT_ITEM.getPrice();
+    public int calculateDiscountAmount(final Order order) {
+        int totalOrderAmount = order.calculateTotalOrderPrice();
+        if (isOverStandardAmount(totalOrderAmount)) {
+            return GIFT_ITEM.getPrice();
+        }
+        return NONE.getPrice();
     }
 
-    public MenuItem giveItem(final int totalOrderAmount) {
+    public MenuItem giveItem(final Order order) {
+        int totalOrderAmount = order.calculateTotalOrderPrice();
         if (isOverStandardAmount(totalOrderAmount)) {
             return GIFT_ITEM;
         }
-        return MenuItem.NONE;
+        return NONE;
     }
 
     private boolean isOverStandardAmount(int amount) {

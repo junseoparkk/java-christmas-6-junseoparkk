@@ -2,6 +2,7 @@ package christmas.model.order;
 
 import christmas.model.calendar.Calendar;
 import christmas.model.menu.MenuCategory;
+import christmas.model.menu.MenuItem;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -28,5 +29,16 @@ public class Order {
 
     public boolean isSpecialDiscountDate() {
         return Calendar.isSpecialDiscountDay(date);
+    }
+
+    public int calculateTotalOrderPrice() {
+        return IntStream.range(0, menus.size())
+                .mapToObj(menus::findOrderLineItemByIndex)
+                .mapToInt(item -> {
+                    MenuItem menuItem = MenuItem.fromName(item.name());
+                    int menuQuantity = item.quantity();
+                    return menuItem.getPrice() * menuQuantity;
+                })
+                .sum();
     }
 }

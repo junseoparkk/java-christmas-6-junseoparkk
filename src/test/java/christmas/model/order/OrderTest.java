@@ -47,4 +47,19 @@ public class OrderTest {
         assertThat(beverageCount).isEqualTo(3);
 
     }
+
+    @DisplayName("총주문 금액을 계산하여 반환해야 한다.")
+    @Test
+    void testCalculateTotalOrderPrice() {
+        //given
+        int date = 1;
+        String menus = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        Order order = new Order(date, new OrderLineItems(menus));
+
+        //when
+        int totalOrderPrice = order.calculateTotalOrderPrice();
+
+        //then
+        assertThat(totalOrderPrice).isEqualTo(142000);
+    }
 }
