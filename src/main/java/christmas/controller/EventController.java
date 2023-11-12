@@ -15,11 +15,16 @@ public class EventController implements Controller {
 
     @Override
     public void run() {
+        proceedEvent();
         printGivenMenu();
         printBenefitDetails();
         printTotalBenefitAmount();
         printExpectedPayAmount();
         printEventBadge();
+    }
+
+    private void proceedEvent() {
+        eventService.proceed();
     }
 
     private void printGivenMenu() {
