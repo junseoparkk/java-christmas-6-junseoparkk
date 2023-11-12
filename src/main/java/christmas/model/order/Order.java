@@ -1,5 +1,6 @@
 package christmas.model.order;
 
+import christmas.model.calendar.Calendar;
 import christmas.model.menu.MenuCategory;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -23,5 +24,9 @@ public class Order {
                 .filter(menu -> menu.getMenuCategory() == menuCategory)
                 .mapToInt(OrderLineItem::quantity)
                 .sum();
+    }
+
+    public boolean isSpecialDiscountDate() {
+        return Calendar.isSpecialDiscountDay(date);
     }
 }
