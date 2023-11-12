@@ -13,6 +13,6 @@ public class WeekendDiscountPolicy implements DiscountPolicy {
 
     @Override
     public int calculateDiscountAmount(final Order order) {
-        return BASIC_DISCOUNT_AMOUNT * order.countMenuByCategory(MenuCategory.MAIN);
+        return BASIC_DISCOUNT_AMOUNT * order.countMenuQuantityByCategory(MenuCategory.MAIN);
     }
 }

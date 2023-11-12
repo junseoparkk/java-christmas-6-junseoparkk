@@ -17,10 +17,11 @@ public class Order {
         return date - 1;
     }
 
-    public int countMenuByCategory(final MenuCategory menuCategory) {
-        return (int) IntStream.range(0, menus.size())
+    public int countMenuQuantityByCategory(final MenuCategory menuCategory) {
+        return IntStream.range(0, menus.size())
                 .mapToObj(menus::findOrderLineItemByIndex)
                 .filter(menu -> menu.getMenuCategory() == menuCategory)
-                .count();
+                .mapToInt(OrderLineItem::quantity)
+                .sum();
     }
 }
