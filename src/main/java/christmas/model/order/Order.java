@@ -29,6 +29,18 @@ public class Order {
                 .sum();
     }
 
+    public boolean isChristmasDiscountSeason() {
+        return Calendar.isChristmasDiscountSeason(date);
+    }
+
+    public boolean isWeekdayDiscountDate() {
+        return Calendar.isWeekday(date);
+    }
+
+    public boolean isWeekendDiscountDate() {
+        return Calendar.isWeekend(date);
+    }
+
     public boolean isSpecialDiscountDate() {
         return Calendar.isSpecialDiscountDay(date);
     }
