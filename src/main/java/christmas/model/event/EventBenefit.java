@@ -20,12 +20,11 @@ public class EventBenefit {
     private final Order order;
 
     public EventBenefit(final Order order) {
-        List<EventCategory> events = Arrays.asList(EventCategory.values());
-        events.forEach(event -> benefits.put(event, false));
+        initializeBenefits();
         this.order = order;
     }
 
-    public Map<EventCategory, Boolean> applyEvent() {
+    public void applyEvent() {
         if (order.calculateTotalOrderPrice() > MINIMUM_ORDER_PRICE) {
             applyChristmasDiscountPolicy(order);
             applyWeekdayDiscountPolicy(order);
@@ -33,11 +32,19 @@ public class EventBenefit {
             applySpecialDiscountPolicy(order);
             applyGiveawayDiscountPolicy(order);
         }
+    }
+
+    public Map<EventCategory, Boolean> getAllBenefits() {
         return Collections.unmodifiableMap(benefits);
     }
 
     public boolean findAppliedEventFrom(final EventCategory eventCategory) {
         return benefits.get(eventCategory);
+    }
+
+    private void initializeBenefits() {
+        List<EventCategory> events = Arrays.asList(EventCategory.values());
+        events.forEach(event -> benefits.put(event, false));
     }
 
     private void applyChristmasDiscountPolicy(Order order) {
