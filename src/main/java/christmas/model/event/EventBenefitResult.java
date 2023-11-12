@@ -9,6 +9,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.IntStream;
 
 public class EventBenefitResult {
     private final Map<EventCategory, Integer> result = new EnumMap<>(EventCategory.class);
@@ -34,6 +35,13 @@ public class EventBenefitResult {
 
     public Map<EventCategory, Integer> getAllEvenResult() {
         return Collections.unmodifiableMap(new EnumMap<>(result));
+    }
+
+    public int getTotalBenefitPrice() {
+        return result.entrySet().stream()
+                .map(Map.Entry::getValue)
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private void initializeResult() {
