@@ -42,9 +42,7 @@ public enum MenuItem {
 
     public static boolean exists(final String name) {
         return Arrays.stream(values())
-                .filter(menuItem -> menuItem.name.equals(name))
-                .findFirst()
-                .isPresent();
+                .anyMatch(menuItem -> menuItem.name.equals(name));
     }
 
     public static MenuItem fromName(final String name) {
@@ -52,6 +50,10 @@ public enum MenuItem {
                 .filter(menuItem -> menuItem.getName().equals(name))
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public static String fromMenuItem(final MenuItem menuItem) {
+        return menuItem.name;
     }
 
     public MenuCategory getCategory() {
