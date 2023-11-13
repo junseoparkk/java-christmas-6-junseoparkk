@@ -24,7 +24,7 @@ public class EventBenefitResultTest {
         eventBenefit.applyEvent();
         EventBenefitResult eventBenefitResult = new EventBenefitResult(eventBenefit, order);
         eventBenefitResult.calculateEventBenefits();
-        Map<EventCategory, Integer> result = eventBenefitResult.getAllEvenResult();
+        Map<EventCategory, Integer> result = eventBenefitResult.getAllEventResult();
 
         //then
         List<Integer> expected = List.of(0, 0, 0, 0, 0);
@@ -46,7 +46,7 @@ public class EventBenefitResultTest {
         eventBenefit.applyEvent();
         EventBenefitResult eventBenefitResult = new EventBenefitResult(eventBenefit, order);
         eventBenefitResult.calculateEventBenefits();
-        Map<EventCategory, Integer> result = eventBenefitResult.getAllEvenResult();
+        Map<EventCategory, Integer> result = eventBenefitResult.getAllEventResult();
 
         //then
         List<Integer> expected = List.of(1200, 4046, 0, 1000, 25000);
@@ -68,7 +68,7 @@ public class EventBenefitResultTest {
         eventBenefit.applyEvent();
         EventBenefitResult eventBenefitResult = new EventBenefitResult(eventBenefit, order);
         eventBenefitResult.calculateEventBenefits();
-        eventBenefitResult.getAllEvenResult();
+        eventBenefitResult.getAllEventResult();
 
         //then
         int totalBenefitPrice = eventBenefitResult.calculateTotalBenefitPrice();

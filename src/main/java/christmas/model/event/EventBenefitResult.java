@@ -29,7 +29,7 @@ public class EventBenefitResult {
         this.order = order;
     }
 
-    public Map<EventCategory, Integer> getAllEvenResult() {
+    public Map<EventCategory, Integer> getAllEventResult() {
         return Collections.unmodifiableMap(new EnumMap<>(result));
     }
 

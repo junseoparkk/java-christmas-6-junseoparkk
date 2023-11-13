@@ -33,7 +33,7 @@ public class EventService {
 
     public Map<EventCategory, Integer> getAllEvents() {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
-        return eventBenefitResult.getAllEvenResult();
+        return eventBenefitResult.getAllEventResult();
     }
 
     public boolean isNotAppliedEvent() {
