@@ -1,12 +1,7 @@
 package christmas.view;
 
-import static christmas.model.menu.MenuItem.NONE;
-
-import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
 import java.text.DecimalFormat;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class ConsoleOutputView {
     private static final DecimalFormat numberFormat = new DecimalFormat("###,###");
@@ -16,9 +11,11 @@ public class ConsoleOutputView {
     private static final String TOTAL_ORDER_PRICE_MESSAGE = "<할인 전 총주문 금액>";
     private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
     private static final String BENEFIT_DETAILS_MESSAGE = "<혜택 내역>";
+    private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "<총혜택 금액>";
     private static final String MENU_WITH_QUANTITY = "%s %d개";
-    private static final String BENEFIT_DETAILS = "%s: -%s원";
+    private static final String MINUS_WON = "-%s원";
     private static final String WON = "%s원";
+    private static final String BENEFIT_DETAILS = "%s: " + MINUS_WON;
     private static final String NONE = "없음";
 
     public void printGreeting() {
@@ -62,15 +59,18 @@ public class ConsoleOutputView {
         System.out.println(BENEFIT_DETAILS_MESSAGE);
     }
 
-    public void printBenefitDetails(final Map<EventCategory, Integer> result) {
-        result.entrySet().stream()
-                .filter(entry -> entry.getValue() != 0)
-                .forEach(entry -> {
-                    String event = entry.getKey().getName();
-                    int amount = entry.getValue();
-                    System.out.printf(BENEFIT_DETAILS, event, numberFormat.format(amount));
-                    printBlankLine();
-                });
+    public void printBenefitDetails(final String event, final int amount) {
+        System.out.printf(BENEFIT_DETAILS, event, numberFormat.format(amount));
+        printBlankLine();
+    }
+
+    public void printTotalBenefitAmountMessage() {
+        printBlankLine();
+        System.out.println(TOTAL_BENEFIT_AMOUNT_MESSAGE);
+    }
+
+    public void printTotalBenefitAmount(final int totalBenefitAmount) {
+        System.out.printf(MINUS_WON, numberFormat.format(totalBenefitAmount));
     }
 
     public void printNone() {

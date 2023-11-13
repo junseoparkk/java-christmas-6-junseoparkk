@@ -49,11 +49,23 @@ public class EventController implements Controller {
             outputView.printNone();
             return;
         }
-
-        outputView.printBenefitDetails(result);
+        result.entrySet().stream()
+                .filter(entry -> entry.getValue() != 0)
+                .forEach(entry -> {
+                    String event = entry.getKey().getName();
+                    int amount = entry.getValue();
+                    outputView.printBenefitDetails(event, amount);
+                });
     }
 
     private void printTotalBenefitAmount() {
+        outputView.printTotalBenefitAmountMessage();
+        int totalBenefitAmount = eventService.getTotalBenefitAmount();
+        if (totalBenefitAmount == 0) {
+            outputView.printNone();
+            return;
+        }
+        outputView.printTotalBenefitAmount(totalBenefitAmount);
     }
 
     private void printExpectedPayAmount() {

@@ -36,4 +36,9 @@ public class EventService {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         return eventBenefitResult.getAllEvenResult();
     }
+
+    public int getTotalBenefitAmount() {
+        EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
+        return eventBenefitResult.calculateTotalBenefitPrice();
+    }
 }
