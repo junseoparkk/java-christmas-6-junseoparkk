@@ -3,6 +3,7 @@ package christmas.controller;
 import static christmas.model.menu.MenuItem.NONE;
 
 import christmas.ApplicationConfig;
+import christmas.model.badge.Badge;
 import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
 import christmas.service.EventService;
@@ -45,9 +46,8 @@ public class EventController implements Controller {
     private void printBenefitDetails() {
         outputView.printBenefitDetailsMessage();
         Map<EventCategory, Integer> result = eventService.getAllEvents();
-        if (result.size() == 0) {
+        if (result.values().stream().allMatch(v -> v == 0)) {
             outputView.printNone();
-            return;
         }
         result.entrySet().stream()
                 .filter(entry -> entry.getValue() != 0)
@@ -62,7 +62,7 @@ public class EventController implements Controller {
         outputView.printTotalBenefitAmountMessage();
         int totalBenefitAmount = eventService.calculateTotalBenefitAmount();
         if (totalBenefitAmount == 0) {
-            outputView.printNone();
+            outputView.printWon(totalBenefitAmount);
             return;
         }
         outputView.printTotalBenefitAmount(totalBenefitAmount);
@@ -74,5 +74,7 @@ public class EventController implements Controller {
     }
 
     private void printEventBadge() {
+        Badge badge = eventService.getEventBadge();
+        outputView.printEventBadge(badge);
     }
 }

@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.model.badge.Badge;
 import christmas.model.menu.GiveawayMenu;
 import java.text.DecimalFormat;
 
@@ -13,6 +14,7 @@ public class ConsoleOutputView {
     private static final String BENEFIT_DETAILS_MESSAGE = "<혜택 내역>";
     private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "<총혜택 금액>";
     private static final String EXPECTED_PAY_AMOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>";
     private static final String MENU_WITH_QUANTITY = "%s %d개";
     private static final String MINUS_WON = "-%s원";
     private static final String WON = "%s원";
@@ -79,10 +81,22 @@ public class ConsoleOutputView {
         printBlankLine();
         System.out.println(EXPECTED_PAY_AMOUNT_MESSAGE);
         System.out.printf(WON, numberFormat.format(payAmount));
+        printBlankLine();
+    }
+
+    public void printEventBadge(final Badge badge) {
+        printBlankLine();
+        System.out.println(EVENT_BADGE_MESSAGE);
+        System.out.println(badge.getName());
     }
 
     public void printNone() {
         System.out.println(NONE);
+    }
+
+    public void printWon(final int amount) {
+        System.out.printf(WON, amount);
+        printBlankLine();
     }
 
     public static void printException(final String exceptionMessage) {

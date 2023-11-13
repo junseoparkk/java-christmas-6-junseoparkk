@@ -2,6 +2,7 @@ package christmas.service;
 
 import static christmas.model.menu.MenuItem.NONE;
 
+import christmas.model.badge.Badge;
 import christmas.model.event.EventBenefit;
 import christmas.model.event.EventBenefitResult;
 import christmas.model.event.EventCategory;
@@ -46,5 +47,11 @@ public class EventService {
         Order order = repository.findOrder();
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         return order.calculateTotalOrderPrice() - eventBenefitResult.calculateTotalDiscountPrice();
+    }
+
+    public Badge getEventBadge() {
+        EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
+        int totalBenefitAmount = eventBenefitResult.calculateTotalBenefitPrice();
+        return Badge.getBadgeByTotalBenefit(totalBenefitAmount);
     }
 }
