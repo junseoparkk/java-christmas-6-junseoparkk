@@ -37,8 +37,14 @@ public class EventService {
         return eventBenefitResult.getAllEvenResult();
     }
 
-    public int getTotalBenefitAmount() {
+    public int calculateTotalBenefitAmount() {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         return eventBenefitResult.calculateTotalBenefitPrice();
+    }
+
+    public int calculatePayAmount() {
+        Order order = repository.findOrder();
+        EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
+        return order.calculateTotalOrderPrice() - eventBenefitResult.calculateTotalDiscountPrice();
     }
 }

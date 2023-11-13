@@ -12,6 +12,7 @@ public class ConsoleOutputView {
     private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
     private static final String BENEFIT_DETAILS_MESSAGE = "<혜택 내역>";
     private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "<총혜택 금액>";
+    private static final String EXPECTED_PAY_AMOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
     private static final String MENU_WITH_QUANTITY = "%s %d개";
     private static final String MINUS_WON = "-%s원";
     private static final String WON = "%s원";
@@ -71,6 +72,13 @@ public class ConsoleOutputView {
 
     public void printTotalBenefitAmount(final int totalBenefitAmount) {
         System.out.printf(MINUS_WON, numberFormat.format(totalBenefitAmount));
+        printBlankLine();
+    }
+
+    public void printExpectedPayAmount(final int payAmount) {
+        printBlankLine();
+        System.out.println(EXPECTED_PAY_AMOUNT_MESSAGE);
+        System.out.printf(WON, numberFormat.format(payAmount));
     }
 
     public void printNone() {

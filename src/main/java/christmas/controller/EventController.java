@@ -60,7 +60,7 @@ public class EventController implements Controller {
 
     private void printTotalBenefitAmount() {
         outputView.printTotalBenefitAmountMessage();
-        int totalBenefitAmount = eventService.getTotalBenefitAmount();
+        int totalBenefitAmount = eventService.calculateTotalBenefitAmount();
         if (totalBenefitAmount == 0) {
             outputView.printNone();
             return;
@@ -69,6 +69,8 @@ public class EventController implements Controller {
     }
 
     private void printExpectedPayAmount() {
+        int payAmount = eventService.calculatePayAmount();
+        outputView.printExpectedPayAmount(payAmount);
     }
 
     private void printEventBadge() {
