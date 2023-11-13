@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class EventBenefit {
-    private static final int MINIMUM_ORDER_PRICE = 10_000;
+    private static final int MINIMUM_EVENT_PRICE = 10_000;
     private static final int GIVEAWAY_EVENT_STANDARD_PRICE = 120_000;
     private final Map<EventCategory, Boolean> benefits = new EnumMap<>(EventCategory.class);
     private final Order order;
@@ -25,7 +25,7 @@ public class EventBenefit {
     }
 
     public void applyEvent() {
-        if (order.calculateTotalOrderPrice() > MINIMUM_ORDER_PRICE) {
+        if (order.calculateTotalOrderPrice() > MINIMUM_EVENT_PRICE) {
             applyChristmasDiscountPolicy(order);
             applyWeekdayDiscountPolicy(order);
             applyWeekendDiscountPolicy(order);
@@ -35,7 +35,7 @@ public class EventBenefit {
     }
 
     public Map<EventCategory, Boolean> getAllBenefits() {
-        return Collections.unmodifiableMap(benefits);
+        return Collections.unmodifiableMap(new EnumMap<>(benefits));
     }
 
     public boolean findAppliedEventFrom(final EventCategory eventCategory) {

@@ -29,6 +29,10 @@ public class EventBenefitResult {
         this.order = order;
     }
 
+    public Map<EventCategory, Integer> getAllEvenResult() {
+        return Collections.unmodifiableMap(new EnumMap<>(result));
+    }
+
     public void calculateEventBenefits() {
         Map<EventCategory, Boolean> benefits = eventBenefit.getAllBenefits();
         result.putAll(benefits.entrySet().stream()
@@ -38,10 +42,6 @@ public class EventBenefitResult {
                         entry -> DiscountPolicyConfig.discountPolicyFrom(entry.getKey())
                                 .calculateDiscountAmount(order)
                 )));
-    }
-
-    public Map<EventCategory, Integer> getAllEvenResult() {
-        return Collections.unmodifiableMap(new EnumMap<>(result));
     }
 
     public int calculateTotalBenefitPrice() {
@@ -54,7 +54,7 @@ public class EventBenefitResult {
     public int calculateTotalDiscountPrice() {
         int totalBenefitPrice = calculateTotalBenefitPrice();
         if (eventBenefit.findAppliedEventFrom(GIVEAWAY_EVENT)) {
-            totalBenefitPrice -= GIVEAWAY_MENU.getPrice();
+            return totalBenefitPrice - GIVEAWAY_MENU.getPrice();
         }
         return totalBenefitPrice;
     }

@@ -1,7 +1,5 @@
 package christmas.controller;
 
-import static christmas.model.menu.MenuItem.NONE;
-
 import christmas.ApplicationConfig;
 import christmas.model.badge.Badge;
 import christmas.model.event.EventCategory;
@@ -22,7 +20,7 @@ public class EventController implements Controller {
     @Override
     public void run() {
         proceedEvent();
-        printGivenMenu();
+        printGiveawayMenu();
         printBenefitDetails();
         printTotalBenefitAmount();
         printExpectedPayAmount();
@@ -33,7 +31,7 @@ public class EventController implements Controller {
         eventService.proceed();
     }
 
-    private void printGivenMenu() {
+    private void printGiveawayMenu() {
         GiveawayMenu giveawayMenu = eventService.getGiveawayMenu();
         outputView.printGiveawayMenuMessage();
         outputView.printGiveawayMenu(giveawayMenu);

@@ -1,12 +1,12 @@
 package christmas.model.event.policy;
 
 import christmas.model.event.EventCategory;
-import christmas.model.event.policy.DiscountPolicy;
 import christmas.model.menu.MenuCategory;
 import christmas.model.order.Order;
 
 public class WeekdayDiscountPolicy implements DiscountPolicy {
     private static final int BASIC_DISCOUNT_AMOUNT = 2023;
+    private static final MenuCategory DISCOUNT_MENU = MenuCategory.DESSERT;
 
     @Override
     public EventCategory getEventCategory() {
@@ -15,6 +15,6 @@ public class WeekdayDiscountPolicy implements DiscountPolicy {
 
     @Override
     public int calculateDiscountAmount(final Order order) {
-        return BASIC_DISCOUNT_AMOUNT * order.countMenuQuantityByCategory(MenuCategory.DESSERT);
+        return BASIC_DISCOUNT_AMOUNT * order.countMenuQuantityByCategory(DISCOUNT_MENU);
     }
 }
