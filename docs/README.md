@@ -2,6 +2,63 @@
 
 ---
 
+## 패키지 구조
+
+```
+christmas
+├── Application.java : 애플리케이션 시작
+├── ApplicationConfig.java : 애플리케이션 의존성 관리 
+├── controller
+│   ├── Controller.java : 컨트롤러 인터페이스
+│   ├── EventController.java : 이벤트 진행 관리 
+│   ├── EventPlannerController.java : 애플리케이션 진행 관리
+│   └── OrderController.java : 주문 진행 관리
+├── exception
+│   ├── InvalidDateException.java : 날짜 예외
+│   └── InvalidOrderException.java : 주문 예외 
+├── model
+│   ├── badge
+│   │   └── Badge.java : 배지 관련 기능
+│   ├── calendar
+│   │   └── Calendar.java : 날짜 관련 기능
+│   ├── event
+│   │   ├── EventBenefit.java : 이벤트 혜택 관련 기능
+│   │   ├── EventBenefitResult.java : 이벤트 혜택 결과 관련 기능
+│   │   ├── EventCategory.java : 이벤트 카테고리 관련 기능
+│   │   └── policy
+│   │       ├── ChristmasDayDiscountPolicy.java : 크리스마스 디데이 할인 정책
+│   │       ├── DiscountPolicy.java : 할인 정책 인터페이스
+│   │       ├── DiscountPolicyConfig.java : 할인 정책 의존성 관리
+│   │       ├── GiveawayEventPolicy.java : 증정 이벤트 정책
+│   │       ├── SpecialDiscountPolicy.java : 특별 할인 정책
+│   │       ├── WeekdayDiscountPolicy.java : 평일 할인 정책
+│   │       └── WeekendDiscountPolicy.java : 주말 할인 정책
+│   ├── menu
+│   │   ├── GiveawayMenu.java : 증정 메뉴 관리
+│   │   ├── MenuCategory.java : 메뉴 카테고리 관련 기능
+│   │   └── MenuItem.java : 메뉴 관리
+│   └── order
+│       ├── Order.java : 주문 관련 기능
+│       ├── OrderLineItem.java : 하나의 주문 메뉴 관리
+│       └── OrderLineItems.java : 여러 개의 주문 메뉴 관리
+├── repository
+│   └── EventPlannerRepository.java : 이벤트 플래너 저장소
+├── service
+│   ├── EventService.java : 이벤트 관련 서비스
+│   └── OrderService.java : 주문 관련 서비스
+├── utils
+│   └── InputHandler.java : 입력 방식 관련 기능
+├── validator
+│   ├── InputValidator.java : 입력 검증 기능
+│   └── OrderValidator.java : 주문 검증 기능
+└── view
+    ├── ConsoleEventOutputView.java : 이벤트 관련 출력 기능
+    ├── ConsoleInputView.java : 입력 기능
+    ├── ConsoleOrderOutputView.java : 주문 관련 출력 기능
+    └── ConsoleOutputView.java : 기타 출력 기능
+```
+---
+
 ## 요구 사항 분석 및 정리
 
 ### 메뉴
