@@ -159,7 +159,7 @@ public class EventTest {
 
         //when
         int discountAmount = giveawayEventPolicy.calculateDiscountAmount(order);
-        MenuItem item = giveawayEventPolicy.giveItem(order);
+        MenuItem item = giveawayEventPolicy.giveawayItem(order);
 
         //then
         assertThat(item).isEqualTo(MenuItem.CHAMPAGNE);

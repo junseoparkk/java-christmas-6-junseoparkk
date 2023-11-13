@@ -1,11 +1,14 @@
 package christmas.model.event;
 
+import static christmas.model.event.EventCategory.*;
 import static christmas.model.event.EventCategory.GIVEAWAY_EVENT;
 import static christmas.model.menu.MenuItem.CHAMPAGNE;
 
 import christmas.model.badge.Badge;
 import christmas.model.event.policy.DiscountPolicy;
 import christmas.model.event.policy.DiscountPolicyConfig;
+import christmas.model.event.policy.GiveawayEventPolicy;
+import christmas.model.menu.GiveawayMenu;
 import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 import java.util.Arrays;
@@ -16,7 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class EventBenefitResult {
-    private static final MenuItem GIFT_ITEM = CHAMPAGNE;
+    private static final MenuItem GIVEAWAY_MENU = CHAMPAGNE;
     private final Map<EventCategory, Integer> result = new EnumMap<>(EventCategory.class);
     private final EventBenefit eventBenefit;
     private final Order order;
@@ -51,8 +54,8 @@ public class EventBenefitResult {
 
     public int calculateTotalDiscountPrice() {
         int totalBenefitPrice = calculateTotalBenefitPrice();
-        if (result.get(GIVEAWAY_EVENT) != 0) {
-            totalBenefitPrice -= GIFT_ITEM.getPrice();
+        if (eventBenefit.findAppliedEventFrom(GIVEAWAY_EVENT)) {
+            totalBenefitPrice -= GIVEAWAY_MENU.getPrice();
         }
         return totalBenefitPrice;
     }
@@ -61,8 +64,16 @@ public class EventBenefitResult {
         return Badge.getBadgeByTotalBenefit(calculateTotalBenefitPrice());
     }
 
+    public GiveawayMenu getGiveawayMenuInformation() {
+        GiveawayEventPolicy discountPolicy
+                = (GiveawayEventPolicy) DiscountPolicyConfig.discountPolicyFrom(GIVEAWAY_EVENT);
+        MenuItem giveawayItem = discountPolicy.giveawayItem(order);
+        int giveawayItemQuantity = discountPolicy.giveawayItemQuantity();
+        return new GiveawayMenu(giveawayItem, giveawayItemQuantity);
+    }
+
     private void initializeResult() {
-        List<EventCategory> events = Arrays.asList(EventCategory.values());
+        List<EventCategory> events = Arrays.asList(values());
         events.forEach(event -> result.put(event, 0));
     }
 }

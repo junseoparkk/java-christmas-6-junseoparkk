@@ -1,12 +1,14 @@
 package christmas.repository;
 
 import christmas.model.event.EventBenefit;
+import christmas.model.event.EventBenefitResult;
 import christmas.model.order.Order;
 
 public class EventPlannerRepository {
     private static EventPlannerRepository instance = new EventPlannerRepository();
     private Order order;
-    private EventBenefit benefit;
+    private EventBenefit eventBenefit;
+    private EventBenefitResult eventBenefitResult;
 
     private EventPlannerRepository() {
     }
@@ -19,11 +21,23 @@ public class EventPlannerRepository {
         this.order = order;
     }
 
-    public void saveBenefit(final EventBenefit benefit) {
-        this.benefit = benefit;
+    public void saveEventBenefit(final EventBenefit eventBenefit) {
+        this.eventBenefit = eventBenefit;
+    }
+
+    public void saveEventBenefitResult(final EventBenefitResult eventBenefitResult) {
+        this.eventBenefitResult = eventBenefitResult;
     }
 
     public Order findOrder() {
         return order;
+    }
+
+    public EventBenefit findEventBenefit() {
+        return eventBenefit;
+    }
+
+    public EventBenefitResult findEventBenefitResult() {
+        return eventBenefitResult;
     }
 }

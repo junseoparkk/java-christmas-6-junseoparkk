@@ -1,5 +1,9 @@
 package christmas.view;
 
+import static christmas.model.menu.MenuItem.NONE;
+
+import christmas.model.menu.GiveawayMenu;
+import christmas.model.menu.MenuItem;
 import java.text.DecimalFormat;
 
 public class ConsoleOutputView {
@@ -8,8 +12,10 @@ public class ConsoleOutputView {
     private static final String EVENT_BENEFIT_GUIDE_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String ORDER_MENU_MESSAGE = "<주문 메뉴>";
     private static final String TOTAL_ORDER_PRICE_MESSAGE = "<할인 전 총주문 금액>";
-    private static final String ORDER_MENU = "%s %d개";
+    private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
+    private static final String MENU_WITH_QUANTITY = "%s %d개";
     private static final String WON = "%s원";
+    private static final String NONE = "없음";
 
     public void printGreeting() {
         System.out.println(EVENT_PLANNER_GREETING_MESSAGE);
@@ -26,7 +32,7 @@ public class ConsoleOutputView {
     }
 
     public void printOrderMenu(final String name, final int quantity) {
-        System.out.printf(ORDER_MENU, name, quantity);
+        System.out.printf(MENU_WITH_QUANTITY, name, quantity);
         printBlankLine();
     }
 
@@ -34,6 +40,21 @@ public class ConsoleOutputView {
         printBlankLine();
         System.out.println(TOTAL_ORDER_PRICE_MESSAGE);
         System.out.printf(WON, numberFormat.format(price));
+        printBlankLine();
+    }
+
+    public void printGiveawayMenuMessage() {
+        printBlankLine();
+        System.out.println(GIVEAWAY_MENU_MESSAGE);
+    }
+
+    public void printGiveawayMenu(final GiveawayMenu giveawayMenu) {
+        System.out.printf(MENU_WITH_QUANTITY, giveawayMenu.getName(), giveawayMenu.quantity());
+        printBlankLine();
+    }
+
+    public void printNone() {
+        System.out.println(NONE);
     }
 
     public static void printException(final String exceptionMessage) {
