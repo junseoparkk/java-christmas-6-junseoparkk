@@ -71,6 +71,11 @@ public class EventBenefitResult {
         return new GiveawayMenu(giveawayItem, giveawayItemQuantity);
     }
 
+    public boolean isNothingAppliedEvent() {
+        return result.values().stream()
+                .allMatch(v -> v == 0);
+    }
+
     private void initializeResult() {
         List<EventCategory> events = Arrays.asList(values());
         events.forEach(event -> result.put(event, 0));

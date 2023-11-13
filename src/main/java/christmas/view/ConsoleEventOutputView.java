@@ -3,11 +3,8 @@ package christmas.view;
 import christmas.model.badge.Badge;
 import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
-import christmas.model.menu.MenuItem;
-import java.text.DecimalFormat;
 
 public class ConsoleEventOutputView extends ConsoleOutputView{
-    private static final DecimalFormat numberFormat = new DecimalFormat("###,###");
     private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
     private static final String BENEFIT_DETAILS_MESSAGE = "<혜택 내역>";
     private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "<총혜택 금액>";
@@ -21,11 +18,12 @@ public class ConsoleEventOutputView extends ConsoleOutputView{
         System.out.println(GIVEAWAY_MENU_MESSAGE);
     }
 
+    public void printBlankLine() {
+        System.out.println();
+    }
+
     public void printGiveawayMenu(final GiveawayMenu giveawayMenu) {
         String format = MENU_WITH_QUANTITY;
-        if (giveawayMenu.item() == MenuItem.NONE) {
-            format = NONE;
-        }
         System.out.printf(format, giveawayMenu.getName(), giveawayMenu.quantity());
         printBlankLine();
         printBlankLine();
@@ -41,16 +39,16 @@ public class ConsoleEventOutputView extends ConsoleOutputView{
     }
 
     public void printTotalBenefitAmountMessage() {
-        printBlankLine();
         System.out.println(TOTAL_BENEFIT_AMOUNT_MESSAGE);
     }
 
     public void printTotalBenefitAmount(final int totalBenefitAmount) {
-        String format = MINUS_WON;
         if (totalBenefitAmount == 0) {
-            format = WON;
+            System.out.printf(WON, totalBenefitAmount);
         }
-        System.out.printf(format, numberFormat.format(totalBenefitAmount));
+        if (totalBenefitAmount != 0) {
+            System.out.printf(MINUS_WON, numberFormat.format(totalBenefitAmount));
+        }
         printBlankLine();
         printBlankLine();
     }
@@ -68,6 +66,8 @@ public class ConsoleEventOutputView extends ConsoleOutputView{
     }
 
     public void printNone() {
-        System.out.println(NONE);
+        System.out.print(NONE);
+        printBlankLine();
+        printBlankLine();
     }
 }

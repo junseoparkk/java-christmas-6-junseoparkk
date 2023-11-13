@@ -37,9 +37,7 @@ public class EventService {
     }
 
     public boolean isNotAppliedEvent() {
-        Order order = repository.findOrder();
-        int totalOrderAmount = order.calculateTotalOrderPrice();
-        return totalOrderAmount < MINIMUM_EVENT_PRICE;
+        return isLessMinimumEventPrice() || isNothingAppliedEvent();
     }
 
     public int calculateTotalBenefitAmount() {
@@ -57,5 +55,15 @@ public class EventService {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         int totalBenefitAmount = eventBenefitResult.calculateTotalBenefitPrice();
         return Badge.getBadgeByTotalBenefit(totalBenefitAmount);
+    }
+
+    private boolean isLessMinimumEventPrice() {
+        Order order = repository.findOrder();
+        return order.calculateTotalOrderPrice() < MINIMUM_EVENT_PRICE;
+    }
+
+    private boolean isNothingAppliedEvent() {
+        EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
+        return eventBenefitResult.isNothingAppliedEvent();
     }
 }

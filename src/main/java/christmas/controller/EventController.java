@@ -4,6 +4,7 @@ import christmas.ApplicationConfig;
 import christmas.model.badge.Badge;
 import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
+import christmas.model.menu.MenuItem;
 import christmas.service.EventService;
 import christmas.view.ConsoleEventOutputView;
 import java.util.Map;
@@ -34,6 +35,10 @@ public class EventController implements Controller {
     private void printGiveawayMenu() {
         GiveawayMenu giveawayMenu = eventService.getGiveawayMenu();
         outputView.printGiveawayMenuMessage();
+        if (giveawayMenu.item() == MenuItem.NONE) {
+            outputView.printNone();
+            return;
+        }
         outputView.printGiveawayMenu(giveawayMenu);
     }
 
@@ -44,6 +49,7 @@ public class EventController implements Controller {
             return;
         }
         printAllBenefitDetails();
+        outputView.printBlankLine();
     }
 
     private void printAllBenefitDetails() {
