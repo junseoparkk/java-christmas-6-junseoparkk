@@ -4,6 +4,7 @@ import static christmas.model.menu.MenuItem.NONE;
 
 import christmas.model.event.EventBenefit;
 import christmas.model.event.EventBenefitResult;
+import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
 import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
@@ -29,5 +30,10 @@ public class EventService {
     public GiveawayMenu getGiveMenu() {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         return eventBenefitResult.getGiveawayMenuInformation();
+    }
+
+    public Map<EventCategory, Integer> getAllEvents() {
+        EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
+        return eventBenefitResult.getAllEvenResult();
     }
 }

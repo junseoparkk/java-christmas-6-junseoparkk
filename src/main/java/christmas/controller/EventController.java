@@ -3,9 +3,11 @@ package christmas.controller;
 import static christmas.model.menu.MenuItem.NONE;
 
 import christmas.ApplicationConfig;
+import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
 import christmas.service.EventService;
 import christmas.view.ConsoleOutputView;
+import java.util.Map;
 
 public class EventController implements Controller {
     private final ConsoleOutputView outputView;
@@ -41,6 +43,14 @@ public class EventController implements Controller {
     }
 
     private void printBenefitDetails() {
+        outputView.printBenefitDetailsMessage();
+        Map<EventCategory, Integer> result = eventService.getAllEvents();
+        if (result.size() == 0) {
+            outputView.printNone();
+            return;
+        }
+
+        outputView.printBenefitDetails(result);
     }
 
     private void printTotalBenefitAmount() {

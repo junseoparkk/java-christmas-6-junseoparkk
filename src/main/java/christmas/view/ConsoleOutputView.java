@@ -2,9 +2,11 @@ package christmas.view;
 
 import static christmas.model.menu.MenuItem.NONE;
 
+import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
-import christmas.model.menu.MenuItem;
 import java.text.DecimalFormat;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ConsoleOutputView {
     private static final DecimalFormat numberFormat = new DecimalFormat("###,###");
@@ -13,7 +15,9 @@ public class ConsoleOutputView {
     private static final String ORDER_MENU_MESSAGE = "<주문 메뉴>";
     private static final String TOTAL_ORDER_PRICE_MESSAGE = "<할인 전 총주문 금액>";
     private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
+    private static final String BENEFIT_DETAILS_MESSAGE = "<혜택 내역>";
     private static final String MENU_WITH_QUANTITY = "%s %d개";
+    private static final String BENEFIT_DETAILS = "%s: -%s원";
     private static final String WON = "%s원";
     private static final String NONE = "없음";
 
@@ -51,6 +55,22 @@ public class ConsoleOutputView {
     public void printGiveawayMenu(final GiveawayMenu giveawayMenu) {
         System.out.printf(MENU_WITH_QUANTITY, giveawayMenu.getName(), giveawayMenu.quantity());
         printBlankLine();
+    }
+
+    public void printBenefitDetailsMessage() {
+        printBlankLine();
+        System.out.println(BENEFIT_DETAILS_MESSAGE);
+    }
+
+    public void printBenefitDetails(final Map<EventCategory, Integer> result) {
+        result.entrySet().stream()
+                .filter(entry -> entry.getValue() != 0)
+                .forEach(entry -> {
+                    String event = entry.getKey().getName();
+                    int amount = entry.getValue();
+                    System.out.printf(BENEFIT_DETAILS, event, numberFormat.format(amount));
+                    printBlankLine();
+                });
     }
 
     public void printNone() {
