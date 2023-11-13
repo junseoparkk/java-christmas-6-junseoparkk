@@ -7,15 +7,15 @@ import christmas.model.badge.Badge;
 import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
 import christmas.service.EventService;
-import christmas.view.ConsoleOutputView;
+import christmas.view.ConsoleEventOutputView;
 import java.util.Map;
 
 public class EventController implements Controller {
-    private final ConsoleOutputView outputView;
+    private final ConsoleEventOutputView outputView;
     private final EventService eventService;
 
     public EventController(final ApplicationConfig applicationConfig) {
-        outputView = applicationConfig.consoleOutputView();
+        outputView = applicationConfig.consoleEventOutputView();
         eventService = applicationConfig.eventService();
     }
 
@@ -34,37 +34,32 @@ public class EventController implements Controller {
     }
 
     private void printGivenMenu() {
+        GiveawayMenu giveawayMenu = eventService.getGiveawayMenu();
         outputView.printGiveawayMenuMessage();
-        GiveawayMenu giveawayMenu = eventService.getGiveMenu();
-        if (giveawayMenu.item() == NONE) {
-            outputView.printNone();
-            return;
-        }
         outputView.printGiveawayMenu(giveawayMenu);
     }
 
     private void printBenefitDetails() {
         outputView.printBenefitDetailsMessage();
-        Map<EventCategory, Integer> result = eventService.getAllEvents();
-        if (result.values().stream().allMatch(v -> v == 0)) {
+        if (eventService.isNotAppliedEvent()) {
             outputView.printNone();
+            return;
         }
+        printAllBenefitDetails();
+    }
+
+    private void printAllBenefitDetails() {
+        Map<EventCategory, Integer> result = eventService.getAllEvents();
         result.entrySet().stream()
                 .filter(entry -> entry.getValue() != 0)
                 .forEach(entry -> {
-                    String event = entry.getKey().getName();
-                    int amount = entry.getValue();
-                    outputView.printBenefitDetails(event, amount);
+                    outputView.printBenefitDetails(entry.getKey(), entry.getValue());
                 });
     }
 
     private void printTotalBenefitAmount() {
-        outputView.printTotalBenefitAmountMessage();
         int totalBenefitAmount = eventService.calculateTotalBenefitAmount();
-        if (totalBenefitAmount == 0) {
-            outputView.printWon(totalBenefitAmount);
-            return;
-        }
+        outputView.printTotalBenefitAmountMessage();
         outputView.printTotalBenefitAmount(totalBenefitAmount);
     }
 

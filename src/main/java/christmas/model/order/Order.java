@@ -62,7 +62,7 @@ public class Order {
                 .collect(Collectors.toMap(
                         item -> MenuItem.fromName(item.name()),
                         OrderLineItem::quantity,
-                        (existing, replacement) -> existing + replacement,
+                        Integer::sum,
                         () -> new EnumMap<>(MenuItem.class)
                 ));
     }

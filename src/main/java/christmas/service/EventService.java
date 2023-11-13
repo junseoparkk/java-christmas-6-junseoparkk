@@ -1,18 +1,16 @@
 package christmas.service;
 
-import static christmas.model.menu.MenuItem.NONE;
-
 import christmas.model.badge.Badge;
 import christmas.model.event.EventBenefit;
 import christmas.model.event.EventBenefitResult;
 import christmas.model.event.EventCategory;
 import christmas.model.menu.GiveawayMenu;
-import christmas.model.menu.MenuItem;
 import christmas.model.order.Order;
 import christmas.repository.EventPlannerRepository;
 import java.util.Map;
 
 public class EventService {
+    private static final int MINIMUM_EVENT_PRICE = 10_000;
     private final EventPlannerRepository repository = EventPlannerRepository.getInstance();
 
     public void proceed() {
@@ -28,7 +26,7 @@ public class EventService {
         repository.saveEventBenefitResult(eventBenefitResult);
     }
 
-    public GiveawayMenu getGiveMenu() {
+    public GiveawayMenu getGiveawayMenu() {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         return eventBenefitResult.getGiveawayMenuInformation();
     }
@@ -36,6 +34,12 @@ public class EventService {
     public Map<EventCategory, Integer> getAllEvents() {
         EventBenefitResult eventBenefitResult = repository.findEventBenefitResult();
         return eventBenefitResult.getAllEvenResult();
+    }
+
+    public boolean isNotAppliedEvent() {
+        Order order = repository.findOrder();
+        int totalOrderAmount = order.calculateTotalOrderPrice();
+        return totalOrderAmount < MINIMUM_EVENT_PRICE;
     }
 
     public int calculateTotalBenefitAmount() {

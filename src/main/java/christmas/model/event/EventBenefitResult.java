@@ -5,7 +5,6 @@ import static christmas.model.event.EventCategory.GIVEAWAY_EVENT;
 import static christmas.model.menu.MenuItem.CHAMPAGNE;
 
 import christmas.model.badge.Badge;
-import christmas.model.event.policy.DiscountPolicy;
 import christmas.model.event.policy.DiscountPolicyConfig;
 import christmas.model.event.policy.GiveawayEventPolicy;
 import christmas.model.menu.GiveawayMenu;
@@ -16,7 +15,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class EventBenefitResult {
     private static final MenuItem GIVEAWAY_MENU = CHAMPAGNE;
@@ -32,13 +31,13 @@ public class EventBenefitResult {
 
     public void calculateEventBenefits() {
         Map<EventCategory, Boolean> benefits = eventBenefit.getAllBenefits();
-        for (Entry<EventCategory, Boolean> entry : benefits.entrySet()) {
-            if (entry.getValue()) {
-                DiscountPolicy discountPolicy = DiscountPolicyConfig.discountPolicyFrom(entry.getKey());
-                int discountAmount = discountPolicy.calculateDiscountAmount(order);
-                result.replace(entry.getKey(), discountAmount);
-            }
-        }
+        result.putAll(benefits.entrySet().stream()
+                .filter(Map.Entry::getValue)
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> DiscountPolicyConfig.discountPolicyFrom(entry.getKey())
+                                .calculateDiscountAmount(order)
+                )));
     }
 
     public Map<EventCategory, Integer> getAllEvenResult() {

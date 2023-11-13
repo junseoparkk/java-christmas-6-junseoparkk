@@ -5,15 +5,15 @@ import christmas.model.menu.MenuItem;
 import christmas.model.order.OrderLineItems;
 import christmas.service.OrderService;
 import christmas.utils.InputHandler;
-import christmas.view.ConsoleOutputView;
+import christmas.view.ConsoleOrderOutputView;
 import java.util.Map;
 
 public class OrderController implements Controller {
-    private final ConsoleOutputView outputView;
+    private final ConsoleOrderOutputView outputView;
     private final OrderService orderService;
 
     public OrderController(final ApplicationConfig applicationConfig) {
-        outputView = applicationConfig.consoleOutputView();
+        outputView = applicationConfig.consoleOrderOutputView();
         orderService = applicationConfig.orderService();
     }
 
