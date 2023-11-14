@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.ApplicationConfig;
 import christmas.view.ConsoleOutputView;
 
@@ -19,9 +20,14 @@ public class EventPlannerController implements Controller {
         printGreeting();
         orderController.run();
         eventController.run();
+        closeConsole();
     }
 
     private void printGreeting() {
         outputView.printGreeting();
+    }
+
+    private void closeConsole() {
+        Console.close();
     }
 }
