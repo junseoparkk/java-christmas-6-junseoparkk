@@ -25,7 +25,7 @@ public class EventBenefit {
     }
 
     public void applyEvent() {
-        if (order.calculateTotalOrderPrice() > MINIMUM_EVENT_PRICE) {
+        if (order.calculateTotalOrderPrice() >= MINIMUM_EVENT_PRICE) {
             applyChristmasDiscountPolicy(order);
             applyWeekdayDiscountPolicy(order);
             applyWeekendDiscountPolicy(order);
