@@ -5,6 +5,8 @@ import static christmas.model.MenuCategory.BEVERAGE;
 import static christmas.model.MenuCategory.DESSERT;
 import static christmas.model.MenuCategory.MAIN;
 
+import java.util.Arrays;
+
 public enum MenuItem {
     //APPETIZER
     MUSHROOM_SOUP(APPETIZER, "양송이수프", 6000),
@@ -24,7 +26,10 @@ public enum MenuItem {
     //BEVERAGE
     ZERO_COKE(BEVERAGE, "제로콜라", 3000),
     RED_WINE(BEVERAGE, "레드와인", 60000),
-    CHAMPAGNE(BEVERAGE, "샴페인", 25000);
+    CHAMPAGNE(BEVERAGE, "샴페인", 25000),
+
+    //
+    NONE(MenuCategory.NONE, "없음", 0);
 
     private final MenuCategory category;
     private final String menu;
@@ -34,5 +39,12 @@ public enum MenuItem {
         this.category = category;
         this.menu = menu;
         this.price = price;
+    }
+
+    public static MenuItem from(final String menu) {
+        return Arrays.stream(values())
+                .filter(v -> v.menu.equals(menu))
+                .findAny()
+                .orElse(NONE);
     }
 }
