@@ -1,5 +1,9 @@
 package christmas.model;
 
+import static christmas.model.MenuCategory.BEVERAGE;
+
+import java.util.Objects;
+
 public class OrderLineItem {
     private final MenuItem menu;
     private final int quantity;
@@ -9,6 +13,30 @@ public class OrderLineItem {
         validateQuantity(quantity);
         this.menu = MenuItem.from(menu);
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o instanceof OrderLineItem) {
+            return menu == ((OrderLineItem) o).menu;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(menu);
+    }
+
+    public boolean isBeverage() {
+        return menu.getCategory() == BEVERAGE;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     private void validateMenu(final String menu) {

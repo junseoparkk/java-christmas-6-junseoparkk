@@ -47,4 +47,8 @@ public enum MenuItem {
                 .findAny()
                 .orElse(NONE);
     }
+
+    public MenuCategory getCategory() {
+        return category;
+    }
 }
