@@ -51,4 +51,8 @@ public enum MenuItem {
     public MenuCategory getCategory() {
         return category;
     }
+
+    public String getMenu() {
+        return menu;
+    }
 }

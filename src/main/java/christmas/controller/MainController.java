@@ -10,5 +10,6 @@ public class MainController {
         final int visitDay = InputHandler.receiveVisitDay();
         final OrderLineItems orderLineItems = InputHandler.receiveOrderLineItems();
         OutputView.printInformationMessage(visitDay);
+        OutputView.printAllMenus(orderLineItems);
     }
 }

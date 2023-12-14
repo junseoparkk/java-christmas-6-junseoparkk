@@ -11,6 +11,14 @@ public class OrderLineItems {
         this.items = items;
     }
 
+    public int size() {
+        return items.size();
+    }
+
+    public OrderLineItem findOrderLineItemByIndex(final int index) {
+        return items.get(index);
+    }
+
     private void validateMenus(final List<OrderLineItem> items) {
         validateDuplicatedMenu(items);
         validateOnlyBeverage(items);

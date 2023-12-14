@@ -31,6 +31,11 @@ public class OrderLineItem {
         return Objects.hashCode(menu);
     }
 
+    @Override
+    public String toString() {
+        return menu.getMenu() + " " + quantity + "개";
+    }
+
     public boolean isBeverage() {
         return menu.getCategory() == BEVERAGE;
     }
