@@ -11,5 +11,6 @@ public class MainController {
         final OrderLineItems orderLineItems = InputHandler.receiveOrderLineItems();
         OutputView.printInformationMessage(visitDay);
         OutputView.printAllMenus(orderLineItems);
+        OutputView.printTotalAmount(orderLineItems.calculateTotalAmount());
     }
 }

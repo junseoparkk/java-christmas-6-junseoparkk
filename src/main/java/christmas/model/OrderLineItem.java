@@ -44,6 +44,10 @@ public class OrderLineItem {
         return quantity;
     }
 
+    public int getAmount() {
+        return menu.getPrice() * quantity;
+    }
+
     private void validateMenu(final String menu) {
         MenuItem menuItem = MenuItem.from(menu);
         if (menuItem == MenuItem.NONE) {

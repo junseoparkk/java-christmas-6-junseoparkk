@@ -23,6 +23,13 @@ public class OutputView {
             OrderLineItem item = orderLineItems.findOrderLineItemByIndex(i);
             System.out.println(item.toString());
         }
+        printBlankLine();
+    }
+
+    public static void printTotalAmount(final int amount) {
+        System.out.println("<할인 전 총주문 금액>");
+        String formattedAmount = String.format("%,d", amount);
+        System.out.println(formattedAmount + "원");
     }
 
     public static void printBlankLine() {

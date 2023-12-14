@@ -19,6 +19,14 @@ public class OrderLineItems {
         return items.get(index);
     }
 
+    public int calculateTotalAmount() {
+        int amount = 0;
+        for (OrderLineItem item : items) {
+            amount += item.getAmount();
+        }
+        return amount;
+    }
+
     private void validateMenus(final List<OrderLineItem> items) {
         validateDuplicatedMenu(items);
         validateOnlyBeverage(items);

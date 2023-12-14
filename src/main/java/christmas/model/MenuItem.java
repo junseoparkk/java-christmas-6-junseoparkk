@@ -55,4 +55,8 @@ public enum MenuItem {
     public String getMenu() {
         return menu;
     }
+
+    public int getPrice() {
+        return price;
+    }
 }
