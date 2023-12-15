@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.model.Badge;
 import christmas.model.OrderLineItem;
 import christmas.model.OrderLineItems;
 

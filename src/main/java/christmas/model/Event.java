@@ -64,6 +64,11 @@ public class Event {
         return totalAmount - discountAmount;
     }
 
+    public Badge getEventBadge() {
+        int totalBenefitAmount = calculateTotalBenefitAmount();
+        return Badge.getBadge(totalBenefitAmount);
+    }
+
     private void initializeEvent() {
         List<EventCategory> categories = Arrays.asList(EventCategory.values());
         for (EventCategory category : categories) {

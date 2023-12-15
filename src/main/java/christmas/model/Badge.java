@@ -1,5 +1,7 @@
 package christmas.model;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 public enum Badge {
@@ -14,5 +16,16 @@ public enum Badge {
     Badge(String name, Predicate<Integer> totalBenefit) {
         this.name = name;
         this.totalBenefit = totalBenefit;
+    }
+
+    public static Badge getBadge(final int totalBenefitAmount) {
+        return Arrays.stream(values())
+                .filter(v -> v.totalBenefit.test(totalBenefitAmount))
+                .findAny()
+                .orElse(NONE);
+    }
+
+    public String getName() {
+        return name;
     }
 }

@@ -31,5 +31,6 @@ public class EventController {
         EventOutputView.printBenefitInformation(eventInformation);
         EventOutputView.printTotalBenefitAmount(event.calculateTotalBenefitAmount());
         EventOutputView.printAfterDiscountAmount(event.calculateAfterDiscountAmount(orderLineItems.calculateTotalAmount()));
+        EventOutputView.printEventBadge(event.getEventBadge());
     }
 }
