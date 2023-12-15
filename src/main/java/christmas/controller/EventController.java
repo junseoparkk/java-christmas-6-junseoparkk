@@ -30,5 +30,6 @@ public class EventController {
         final Map<EventCategory, Integer> eventInformation = event.getInformation(visitDay, orderLineItems);
         EventOutputView.printBenefitInformation(eventInformation);
         EventOutputView.printTotalBenefitAmount(event.calculateTotalBenefitAmount());
+        EventOutputView.printAfterDiscountAmount(event.calculateAfterDiscountAmount(orderLineItems.calculateTotalAmount()));
     }
 }

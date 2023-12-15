@@ -56,6 +56,14 @@ public class Event {
         return totalBenefitAmount;
     }
 
+    public int calculateAfterDiscountAmount(final int totalAmount) {
+        int discountAmount = calculateTotalBenefitAmount();
+        if (events.get(GIVEAWAY_EVENT)) {
+            discountAmount -= GIVEAWAY_EVENT.getDiscountAmount();
+        }
+        return totalAmount - discountAmount;
+    }
+
     private void initializeEvent() {
         List<EventCategory> categories = Arrays.asList(EventCategory.values());
         for (EventCategory category : categories) {

@@ -30,6 +30,12 @@ public class EventOutputView {
         printBlankLine();
     }
 
+    public static void printAfterDiscountAmount(final int payAmount) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%,d원", payAmount);
+        printBlankLine();
+    }
+
     public static void printBlankLine() {
         System.out.println();
     }
