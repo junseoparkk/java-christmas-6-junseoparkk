@@ -2,16 +2,11 @@ package christmas.controller;
 
 import christmas.model.Event;
 import christmas.model.EventCategory;
-import christmas.model.MenuItem;
 import christmas.model.OrderLineItems;
-import christmas.service.EventService;
 import christmas.view.EventOutputView;
-import christmas.view.OutputView;
 import java.util.Map;
 
 public class EventController {
-    private final EventService eventService = new EventService();
-
     public void process(final int visitDay, final OrderLineItems orderLineItems) {
         applyEvents(visitDay, orderLineItems);
     }
