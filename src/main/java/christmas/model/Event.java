@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Event {
     private final Map<EventCategory, Boolean> events = new EnumMap<EventCategory, Boolean>(EventCategory.class);
+    private final Map<EventCategory, Integer> information = new EnumMap<EventCategory, Integer>(EventCategory.class);
 
     public Event() {
         initializeEvent();
@@ -27,7 +28,6 @@ public class Event {
     }
 
     public Map<EventCategory, Integer> getInformation(final int visitDay, final OrderLineItems orderLineItems) {
-        final Map<EventCategory, Integer> information = new EnumMap<EventCategory, Integer>(EventCategory.class);
         final int dessertCount = orderLineItems.calculateDessertCount();
         final int mainCount = orderLineItems.calculateMainCount();
         if (events.get(CHRISTMAS_DAY_DISCOUNT)) {
@@ -46,6 +46,14 @@ public class Event {
             information.put(GIVEAWAY_EVENT, EventCategory.calculateGiveawayEvent());
         }
         return information;
+    }
+
+    public int calculateTotalBenefitAmount() {
+        int totalBenefitAmount = 0;
+        for (Map.Entry<EventCategory, Integer> entry : information.entrySet()) {
+            totalBenefitAmount += entry.getValue();
+        }
+        return totalBenefitAmount;
     }
 
     private void initializeEvent() {

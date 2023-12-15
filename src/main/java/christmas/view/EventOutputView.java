@@ -20,6 +20,14 @@ public class EventOutputView {
             System.out.printf("%s: -%,d원", entry.getKey().getName(), entry.getValue());
             printBlankLine();
         }
+        printBlankLine();
+    }
+
+    public static void printTotalBenefitAmount(final int totalBenefitAmount) {
+        System.out.println("<총혜택 금액>");
+        System.out.printf("-%,d원", totalBenefitAmount);
+        printBlankLine();
+        printBlankLine();
     }
 
     public static void printBlankLine() {
