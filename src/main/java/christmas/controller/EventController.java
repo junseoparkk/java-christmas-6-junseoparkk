@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.model.Event;
 import christmas.model.MenuItem;
 import christmas.model.OrderLineItems;
 import christmas.service.EventService;
@@ -21,6 +22,7 @@ public class EventController {
     }
 
     private void applyEvents(final int visitDay, final OrderLineItems orderLineItems) {
-
+        final Event event = new Event();
+        event.apply(visitDay, orderLineItems);
     }
 }
