@@ -5,7 +5,8 @@ public enum EventCategory {
     WEEK_DAY_DISCOUNT("평일 할인", 2023),
     WEEKEND_DAY_DISCOUNT("주말 할인", 2023),
     SPECIAL_EVENT("특별 할인", 1000),
-    GIVEAWAY_EVENT("증정 이벤트", 25000);
+    GIVEAWAY_EVENT("증정 이벤트", 25000),
+    NONE("없음", 0);
 
     private final String name;
     private final int discountAmount;
