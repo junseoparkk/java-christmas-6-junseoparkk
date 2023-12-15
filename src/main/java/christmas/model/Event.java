@@ -1,5 +1,6 @@
 package christmas.model;
 
+import static christmas.model.EventCategory.CHRISTMAS_DAY_DISCOUNT;
 import static christmas.model.EventCategory.GIVEAWAY_EVENT;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ public class Event {
     }
 
     public void apply(final int visitDay, final OrderLineItems orderLineItems) {
+        applyChristmasEvent(visitDay);
         applyGiveawayEvent(orderLineItems.calculateTotalAmount());
     }
 
@@ -22,6 +24,12 @@ public class Event {
         List<EventCategory> categories = Arrays.asList(EventCategory.values());
         for (EventCategory category : categories) {
             events.put(category, false);
+        }
+    }
+
+    private void applyChristmasEvent(final int visitDay) {
+        if (Calendar.isChristmasSeason(visitDay)) {
+            events.replace(CHRISTMAS_DAY_DISCOUNT, true);
         }
     }
 
