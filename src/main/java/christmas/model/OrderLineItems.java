@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrderLineItems {
+    private static final String ORDER_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private final List<OrderLineItem> items;
 
     public OrderLineItems(final List<OrderLineItem> items) {
@@ -58,7 +59,7 @@ public class OrderLineItems {
                 .distinct()
                 .collect(Collectors.toList());
         if (target.size() != items.size()) {
-            throw new IllegalArgumentException("[ERROR] 중복된 메뉴가 존재합니다.");
+            throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
         }
     }
 
@@ -68,7 +69,7 @@ public class OrderLineItems {
                 return;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 음료만 주문할 수 없습니다.");
+        throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
     }
 
     private void validateTotalOrderQuantity(final List<OrderLineItem> items) {
@@ -77,7 +78,7 @@ public class OrderLineItems {
             totalQuantity += item.getQuantity();
         }
         if (totalQuantity > 20) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 최대 20개까지 주문할 수 있습니다..");
+            throw new IllegalArgumentException(ORDER_ERROR_MESSAGE);
         }
     }
 }

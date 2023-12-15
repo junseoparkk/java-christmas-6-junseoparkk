@@ -7,6 +7,7 @@ import static christmas.model.MenuCategory.MAIN;
 import java.util.Objects;
 
 public class OrderLineItem {
+    private static final String ORDER_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private final MenuItem menu;
     private final int quantity;
 
@@ -61,13 +62,13 @@ public class OrderLineItem {
     private void validateMenu(final String menu) {
         MenuItem menuItem = MenuItem.from(menu);
         if (menuItem == MenuItem.NONE) {
-            throw new IllegalArgumentException("[ERROR] 존재하지 않는 메뉴입니다.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
     private void validateQuantity(final int quantity) {
         if (quantity < 1) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 최소 1개 이상 주문할 수 있습니다.");
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 }
