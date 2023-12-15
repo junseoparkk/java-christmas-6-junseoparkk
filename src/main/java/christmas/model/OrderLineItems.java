@@ -27,6 +27,26 @@ public class OrderLineItems {
         return amount;
     }
 
+    public int calculateDessertCount() {
+        int count = 0;
+        for (OrderLineItem item : items) {
+            if (item.isDessert()) {
+                count += item.getQuantity();
+            }
+        }
+        return count;
+    }
+
+    public int calculateMainCount() {
+        int count = 0;
+        for (OrderLineItem item : items) {
+            if (item.isMain()) {
+                count += item.getQuantity();
+            }
+        }
+        return count;
+    }
+
     private void validateMenus(final List<OrderLineItem> items) {
         validateDuplicatedMenu(items);
         validateOnlyBeverage(items);

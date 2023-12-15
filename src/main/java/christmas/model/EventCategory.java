@@ -16,39 +16,24 @@ public enum EventCategory {
         this.discountAmount = discountAmount;
     }
 
-    public int calculateChristmasDayDiscount(final int day) {
-        if (this == CHRISTMAS_DAY_DISCOUNT) {
-            return discountAmount + (day - 1) * 100;
-        }
-        return 0;
+    public static int calculateChristmasDayDiscount(final int day) {
+        return CHRISTMAS_DAY_DISCOUNT.discountAmount + (day - 1) * 100;
     }
 
-    public int calculateWeekdayDiscount(final int dessertCount) {
-        if (this == WEEK_DAY_DISCOUNT) {
-            return dessertCount * discountAmount;
-        }
-        return 0;
+    public static int calculateWeekdayDiscount(final int dessertCount) {
+        return WEEKEND_DAY_DISCOUNT.discountAmount * dessertCount;
     }
 
-    public int calculateWeekendDiscount(final int mainCount) {
-        if (this == WEEKEND_DAY_DISCOUNT) {
-            return mainCount * discountAmount;
-        }
-        return 0;
+    public static int calculateWeekendDiscount(final int mainCount) {
+        return WEEKEND_DAY_DISCOUNT.discountAmount * mainCount;
     }
 
-    public int calculateSpecialDiscount() {
-        if (this == SPECIAL_EVENT) {
-            return discountAmount;
-        }
-        return 0;
+    public static int calculateSpecialDiscount() {
+        return SPECIAL_EVENT.discountAmount;
     }
 
-    public int calculateGiveawayEvent() {
-        if (this == GIVEAWAY_EVENT) {
-            return discountAmount;
-        }
-        return 0;
+    public static int calculateGiveawayEvent() {
+        return GIVEAWAY_EVENT.discountAmount;
     }
 
     public String getName() {

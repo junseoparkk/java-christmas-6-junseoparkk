@@ -1,6 +1,8 @@
 package christmas.model;
 
 import static christmas.model.MenuCategory.BEVERAGE;
+import static christmas.model.MenuCategory.DESSERT;
+import static christmas.model.MenuCategory.MAIN;
 
 import java.util.Objects;
 
@@ -38,6 +40,14 @@ public class OrderLineItem {
 
     public boolean isBeverage() {
         return menu.getCategory() == BEVERAGE;
+    }
+
+    public boolean isDessert() {
+        return menu.getCategory() == DESSERT;
+    }
+
+    public boolean isMain() {
+        return menu.getCategory() == MAIN;
     }
 
     public int getQuantity() {

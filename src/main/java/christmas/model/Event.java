@@ -26,6 +26,28 @@ public class Event {
         applyGiveawayEvent(orderLineItems.calculateTotalAmount());
     }
 
+    public Map<EventCategory, Integer> getInformation(final int visitDay, final OrderLineItems orderLineItems) {
+        final Map<EventCategory, Integer> information = new EnumMap<EventCategory, Integer>(EventCategory.class);
+        final int dessertCount = orderLineItems.calculateDessertCount();
+        final int mainCount = orderLineItems.calculateMainCount();
+        if (events.get(CHRISTMAS_DAY_DISCOUNT)) {
+            information.put(CHRISTMAS_DAY_DISCOUNT, EventCategory.calculateChristmasDayDiscount(visitDay));
+        }
+        if (events.get(WEEK_DAY_DISCOUNT)) {
+            information.put(WEEK_DAY_DISCOUNT, EventCategory.calculateWeekdayDiscount(dessertCount));
+        }
+        if (events.get(WEEKEND_DAY_DISCOUNT)) {
+            information.put(WEEKEND_DAY_DISCOUNT, EventCategory.calculateWeekendDiscount(mainCount));
+        }
+        if (events.get(SPECIAL_EVENT)) {
+            information.put(SPECIAL_EVENT, EventCategory.calculateSpecialDiscount());
+        }
+        if (events.get(GIVEAWAY_EVENT)) {
+            information.put(GIVEAWAY_EVENT, EventCategory.calculateGiveawayEvent());
+        }
+        return information;
+    }
+
     private void initializeEvent() {
         List<EventCategory> categories = Arrays.asList(EventCategory.values());
         for (EventCategory category : categories) {
