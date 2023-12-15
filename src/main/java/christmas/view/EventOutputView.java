@@ -11,22 +11,37 @@ public class EventOutputView {
 
     public static void printGiveawayMenu(final MenuItem menuItem) {
         System.out.println("<증정 메뉴>");
-        System.out.println(menuItem.getMenu());
+        if (menuItem == MenuItem.NONE) {
+            System.out.println(menuItem.getMenu());
+        }
+        if (menuItem == MenuItem.CHAMPAGNE) {
+            System.out.println(menuItem.getMenu() + " 1개");
+        }
         printBlankLine();
     }
 
     public static void printBenefitInformation(final Map<EventCategory, Integer> information) {
         System.out.println("<혜택 내역>");
-        for (Map.Entry<EventCategory, Integer> entry : information.entrySet()) {
-            System.out.printf("%s: -%,d원", entry.getKey().getName(), entry.getValue());
-            printBlankLine();
+        if (information.size() == 0) {
+            System.out.println("없음");
+        }
+        if (information.size() != 0) {
+            for (Map.Entry<EventCategory, Integer> entry : information.entrySet()) {
+                System.out.printf("%s: -%,d원", entry.getKey().getName(), entry.getValue());
+                printBlankLine();
+            }
         }
         printBlankLine();
     }
 
     public static void printTotalBenefitAmount(final int totalBenefitAmount) {
         System.out.println("<총혜택 금액>");
-        System.out.printf("-%,d원", totalBenefitAmount);
+        if (totalBenefitAmount == 0) {
+            System.out.printf("%d원", totalBenefitAmount);
+        }
+        if (totalBenefitAmount != 0) {
+            System.out.printf("-%,d원", totalBenefitAmount);
+        }
         printBlankLine();
         printBlankLine();
     }
@@ -40,7 +55,7 @@ public class EventOutputView {
 
     public static void printEventBadge(final Badge badge) {
         System.out.println("<12월 이벤트 배지>");
-        System.out.println(badge.getName());
+        System.out.print(badge.getName());
     }
 
     public static void printBlankLine() {

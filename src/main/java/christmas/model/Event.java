@@ -20,11 +20,13 @@ public class Event {
     }
 
     public void apply(final int visitDay, final OrderLineItems orderLineItems) {
-        applyChristmasEvent(visitDay);
-        applyWeekDayEvent(visitDay);
-        applyWeekendDayEvent(visitDay);
-        applySpecialEvent(visitDay);
-        applyGiveawayEvent(orderLineItems.calculateTotalAmount());
+        if (orderLineItems.calculateTotalAmount() > 10000) {
+            applyChristmasEvent(visitDay);
+            applyWeekDayEvent(visitDay);
+            applyWeekendDayEvent(visitDay);
+            applySpecialEvent(visitDay);
+            applyGiveawayEvent(orderLineItems.calculateTotalAmount());
+        }
     }
 
     public Map<EventCategory, Integer> getInformation(final int visitDay, final OrderLineItems orderLineItems) {
@@ -46,6 +48,13 @@ public class Event {
             information.put(GIVEAWAY_EVENT, EventCategory.calculateGiveawayEvent());
         }
         return information;
+    }
+
+    public MenuItem getGiveawayMenu(final int totalAmount) {
+        if (totalAmount > 120000) {
+            return MenuItem.CHAMPAGNE;
+        }
+        return MenuItem.NONE;
     }
 
     public int calculateTotalBenefitAmount() {
